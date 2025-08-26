@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular-Janis_shop - School Books Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3f7;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #5d8bf4;
+            --secondary-color: #2d4263;
+            --accent-color: #4fc3f7;
+            --light-color: #212529;
+            --dark-color: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            transition: var(--transition);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 0;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+            transition: var(--transition);
+        }
+
+        header.scrolled .logo {
+            font-size: 20px;
+        }
+
+        header.scrolled .logo i {
+            font-size: 24px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        nav ul li a i {
+            margin-right: 5px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .theme-toggle, .cart-btn, .user-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            margin-left: 15px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--danger-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .popular-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .popular-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .popular-hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .popular-hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* Popular Books Section */
+        .popular-section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            display: inline-block;
+            padding-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 10px 25px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--dark-color);
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 0 10px 10px;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .tab-btn:hover:not(.active) {
+            color: var(--primary-color);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .book-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .book-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .book-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--danger-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: var(--border-radius);
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .book-img {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .book-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .book-card:hover .book-img img {
+            transform: scale(1.1);
+        }
+
+        .book-info {
+            padding: 20px;
+        }
+
+        .book-category {
+            font-size: 14px;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .book-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+            font-weight: 600;
+            display: -webkit-box;
+            /* -webkit-line-clamp: 2; */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .book-author {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .book-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stars {
+            color: var(--warning-color);
+            margin-right: 10px;
+        }
+
+        .rating-count {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .book-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .original-price {
+            font-size: 16px;
+            text-decoration: line-through;
+            color: #999;
+            margin-right: 10px;
+        }
+
+        .add-to-cart {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background-color: #3aa8e0;
+            transform: translateY(-3px);
+        }
+
+        /* Featured Categories */
+        .featured-categories {
+            padding: 60px 0;
+            background-color: rgba(74, 111, 165, 0.05);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .category-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(79, 195, 247, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: var(--accent-color);
+            font-size: 24px;
+        }
+
+        .category-name {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .book-count {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 60px 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .testimonial-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            font-size: 60px;
+            color: rgba(79, 195, 247, 0.1);
+            position: absolute;
+            top: -20px;
+            left: -15px;
+            line-height: 1;
+            z-index: 0;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 60px 0;
+            background: linear-gradient(rgba(74, 111, 165, 0.9), rgba(74, 111, 165, 0.9)), url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            font-size: 16px;
+        }
+
+        .newsletter-form button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background-color: #3aa8e0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            color: #bbb;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .footer-links a i {
+            margin-right: 8px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .popular-hero h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: var(--primary-color);
+                transition: var(--transition);
+                z-index: 99;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .header-actions {
+                gap: 15px;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: var(--border-radius);
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-form button {
+                border-radius: var(--border-radius);
+                padding: 15px;
+            }
+            
+            .popular-hero h1 {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .popular-hero {
+                height: 250px;
+            }
+            
+            .popular-hero h1 {
+                font-size: 28px;
+            }
+        }
+
+        /* Dark Mode */
+        [data-theme="dark"] body {
+            background-color: #121212;
+        }
+
+        [data-theme="dark"] .book-card,
+        [data-theme="dark"] .category-card,
+        [data-theme="dark"] .testimonial-card {
+            background-color: #1e1e1e;
+        }
+
+        [data-theme="dark"] .book-title,
+        [data-theme="dark"] .category-name,
+        [data-theme="dark"] .testimonial-text {
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .book-author,
+        [data-theme="dark"] .book-rating .rating-count,
+        [data-theme="dark"] .book-count,
+        [data-theme="dark"] .author-info p {
+            color: #b0b0b0;
+        }
+
+        [data-theme="dark"] .featured-categories {
+            background-color: rgba(30, 30, 30, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <span>Janis_shop</span>
+                </div>
+                
+                <button class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav>
+                    <ul>
+                        <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="categories.html"><i class="fas fa-list"></i> Categories</a></li>
+                        <li><a href="featured.html" class="active"><i class="fas fa-star"></i> Featured</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <button class="theme-toggle" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="user-btn" title="Account">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="cart-btn" title="Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="popular-hero">
+        <div class="container">
+            <div class="popular-hero-content">
+                <h1>Our Most Popular Books</h1>
+                <p>Discover the books that our customers love the most</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Books Section -->
+    <section class="popular-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Bestsellers</h2>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-category="all">All</button>
+                <button class="tab-btn" data-category="education">Education</button>
+                <button class="tab-btn" data-category="literature">Literature</button>
+                <button class="tab-btn" data-category="science">Science</button>
+                <button class="tab-btn" data-category="history">History</button>
+            </div>
+            
+            <div class="books-grid">
+                <!-- Book 1 -->
+                <div class="book-card" data-animate data-category="education">
+                    <div class="book-img">
+                        <span class="book-badge">Bestseller</span>
+                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Advanced Mathematics">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">Education</p>
+                        <h3 class="book-title">Advanced Mathematics for Secondary Schools</h3>
+                        <p class="book-author">By Dr. James Wilson</p>
+                        <div class="book-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(128 reviews)</span>
+                        </div>
+                        <div class="book-price">
+                            <div>
+                                <span class="original-price">3599 XAF</span>
+                                <span class="price">2999 XAF</span>
+                            </div>
+                            <button class="add-to-cart" title="Add to Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Book 2 -->
+                <div class="book-card" data-animate data-animate-delay="100" data-category="literature">
+                    <div class="book-img">
+                        <span class="book-badge">New Release</span>
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="African Literature">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">Literature</p>
+                        <h3 class="book-title">African Literature Classics Collection</h3>
+                        <p class="book-author">By Various Authors</p>
+                        <div class="book-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(89 reviews)</span>
+                        </div>
+                        <div class="book-price">
+                            <div>
+                                <span class="price">2499 XAF</span>
+                            </div>
+                            <button class="add-to-cart" title="Add to Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Book 3 -->
+                <div class="book-card" data-animate data-animate-delay="200" data-category="science">
+                    <div class="book-img">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Physics Textbook">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">Science</p>
+                        <h3 class="book-title">Modern Physics for High School Students</h3>
+                        <p class="book-author">By Prof. Sarah Johnson</p>
+                        <div class="book-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(76 reviews)</span>
+                        </div>
+                        <div class="book-price">
+                            <div>
+                                <span class="original-price">3299 XAF</span>
+                                <span class="price">2799 XAF</span>
+                            </div>
+                            <button class="add-to-cart" title="Add to Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Book 4 -->
+                <div class="book-card" data-animate data-animate-delay="300" data-category="history">
+                    <div class="book-img">
+                        <span class="book-badge">Bestseller</span>
+                        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="World History">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">History</p>
+                        <h3 class="book-title">World History: From Ancient to Modern Times</h3>
+                        <p class="book-author">By Dr. Michael Brown</p>
+                        <div class="book-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(112 reviews)</span>
+                        </div>
+                        <div class="book-price">
+                            <div>
+                                <span class="price">3150 XAF</span>
+                            </div>
+                            <button class="add-to-cart" title="Add to Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Book 5 -->
+                <div class="book-card" data-animate data-category="education">
+                    <div class="book-img">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mathematics Workbook">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">Education</p>
+                        <h3 class="book-title">Mathematics Practice Workbook - Grade 10</h3>
+                        <p class="book-author">By Education Press</p>
+                        <div class="book-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(64 reviews)</span>
+                        </div>
+                        <div class="book-price">
+                            <div>
+                                <span class="price">1899 XAF</span>
+                            </div>
+                            <button class="add-to-cart" title="Add to Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Book 6 -->
+                <div class="book-card" data-animate data-animate-delay="100" data-category="literature">
+                    <div class="book-img">
+                        <span class="book-badge">New Release</span>
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Contemporary African Writers">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">Literature</p>
+                        <h3 class="book-title">Contemporary African Writers - Volume 3</h3>
+                        <p class="book-author">By African Literature Society</p>
+                        <div class="book-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(42 reviews)</span>
+                        </div>
+                        <div class="book-price">
+                            <div>
+                                <span class="original-price">2899 XAF</span>
+                                <span class="price">2299 XAF</span>
+                            </div>
+                            <button class="add-to-cart" title="Add to Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Book 7 -->
+                <div class="book-card" data-animate data-animate-delay="200" data-category="science">
+                    <div class="book-img">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Chemistry Textbook">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">Science</p>
+                        <h3 class="book-title">Chemistry Concepts for Secondary Schools</h3>
+                        <p class="book-author">By Dr. Elizabeth Green</p>
+                        <div class="book-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(58 reviews)</span>
+                        </div>
+                        <div class="book-price">
+                            <div>
+                                <span class="price">2650 XAF</span>
+                            </div>
+                            <button class="add-to-cart" title="Add to Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Book 8 -->
+                <div class="book-card" data-animate data-animate-delay="300" data-category="history">
+                    <div class="book-img">
+                        <span class="book-badge">Bestseller</span>
+                        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="African History">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">History</p>
+                        <h3 class="book-title">African History: Pre-Colonial to Modern Era</h3>
+                        <p class="book-author">By Prof. Kwame Nkrumah</p>
+                        <div class="book-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(97 reviews)</span>
+                        </div>
+                        <div class="book-price">
+                            <div>
+                                <span class="original-price">3499 XAF</span>
+                                <span class="price">2999 XAF</span>
+                            </div>
+                            <button class="add-to-cart" title="Add to Cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="featured-categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Browse by Category</h2>
+            </div>
+            
+            <div class="categories-grid">
+                <div class="category-card" data-animate>
+                    <div class="category-icon">
+                        <i class="fas fa-square-root-alt"></i>
+                    </div>
+                    <h3 class="category-name">Mathematics</h3>
+                    <p class="book-count">85+ Books</p>
+                </div>
+                
+                <div class="category-card" data-animate data-animate-delay="100">
+                    <div class="category-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3 class="category-name">Science</h3>
+                    <p class="book-count">120+ Books</p>
+                </div>
+                
+                <div class="category-card" data-animate data-animate-delay="200">
+                    <div class="category-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="category-name">Literature</h3>
+                    <p class="book-count">95+ Books</p>
+                </div>
+                
+                <div class="category-card" data-animate data-animate-delay="300">
+                    <div class="category-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3 class="category-name">History</h3>
+                    <p class="book-count">75+ Books</p>
+                </div>
+                
+                <div class="category-card" data-animate>
+                    <div class="category-icon">
+                        <i class="fas fa-globe-africa"></i>
+                    </div>
+                    <h3 class="category-name">Geography</h3>
+                    <p class="book-count">65+ Books</p>
+                </div>
+                
+                <div class="category-card" data-animate data-animate-delay="100">
+                    <div class="category-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 class="category-name">Languages</h3>
+                    <p class="book-count">110+ Books</p>
+                </div>
+                
+                <div class="category-card" data-animate data-animate-delay="200">
+                    <div class="category-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="category-name">Philosophy</h3>
+                    <p class="book-count">45+ Books</p>
+                </div>
+                
+                <div class="category-card" data-animate data-animate-delay="300">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="category-name">Economics</h3>
+                    <p class="book-count">60+ Books</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-animate>
+                    <div class="testimonial-text">
+                        <p>I've been buying textbooks from Janis_shop for my children for years. The quality is always excellent and the prices are very reasonable compared to other bookstores.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="../image/bakal.jpg" alt="Sarah M.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah M.</h4>
+                            <p>Parent & Customer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card" data-animate data-animate-delay="100">
+                    <div class="testimonial-text">
+                        <p>As a teacher, I appreciate the wide selection of educational materials. The delivery is always fast and the books arrive in perfect condition. Highly recommended!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="../image/bakal.jpg" alt="David K.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Joel</h4>
+                            <p>High School Teacher</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card" data-animate data-animate-delay="200">
+                    <div class="testimonial-text">
+                        <p>The African literature collection I purchased was exactly what I needed for my university course. The customer service team was very helpful when I had questions about availability.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="../image/vitrice.jpg" alt="Amina B.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Vitrice</h4>
+                            <p>University Student</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter to receive updates on new arrivals, special offers, and educational resources.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <p>Janis_shop is a bookstore specialized in educational and academic books in Cameroon.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="categories.html"><i class="fas fa-chevron-right"></i> Categories</a></li>
+                        <li><a href="featured.html"><i class="fas fa-chevron-right"></i> Popular</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> My Account</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Order Tracking</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Wishlist</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Shipping Policy</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Returns & Refunds</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Education Street, Douala, Cameroon</p>
+                    <p><i class="fas fa-phone"></i> +237 672 096 673</p>
+                    <p><i class="fas fa-envelope"></i> janisfozoh@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 8am-6pm, Sat: 9am-2pm</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Janis_shop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu Mobile Toggle
+            document.querySelector('.menu-toggle').addEventListener('click', function() {
+                document.querySelector('nav').classList.toggle('active');
+            });
+
+            // Dark Mode Toggle
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            });
+
+            // Header Scroll Animation
+            let lastScroll = 0;
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    document.querySelector('header').classList.add('scrolled');
+                    
+                    if (currentScroll > lastScroll && currentScroll > 100) {
+                        // Scroll down
+                        document.querySelector('header').style.transform = 'translateY(-100%)';
+                    } else {
+                        // Scroll up
+                        document.querySelector('header').style.transform = 'translateY(0)';
+                    }
+                } else {
+                    document.querySelector('header').classList.remove('scrolled');
+                    document.querySelector('header').style.transform = 'translateY(0)';
+                }
+                
+                lastScroll = currentScroll;
+            });
+
+            // Animate elements on scroll
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('[data-animate]');
+                const windowHeight = window.innerHeight;
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementPosition < windowHeight - elementVisible) {
+                        element.classList.add('animate');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on load
+
+            // Tab Filtering
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const bookCards = document.querySelectorAll('.book-card');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active tab
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter books
+                    const category = this.getAttribute('data-category');
+                    bookCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Add to Cart functionality
+            const addToCartBtns = document.querySelectorAll('.add-to-cart');
+            const cartCount = document.querySelector('.cart-count');
+            let count = 0;
+            
+            addToCartBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    count++;
+                    cartCount.textContent = count;
+                    
+                    // Animation
+                    this.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-shopping-cart"></i>';
+                    }, 1000);
+                });
+            });
+
+            // Newsletter form submission
+            const newsletterForm = document.querySelector('.newsletter-form');
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input').value;
+                alert(`Thank you for subscribing with ${email}! You'll receive our newsletter soon.`);
+                this.reset();
+            });
+        });
+    </script>
+</body>
+</html>
